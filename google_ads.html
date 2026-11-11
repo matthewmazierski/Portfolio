@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Five product carousel ad sizes</title>
+  <style>
+    :root { color-scheme: light; font-family: Arial, Helvetica, sans-serif; color: #242824; background: #e9ebe5; }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    .page { max-width: 1180px; margin: auto; padding: 48px 24px 80px; }
+    .intro { max-width: 680px; margin-bottom: 42px; }
+    .eyebrow { color: #697662; font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+    h1 { margin: 12px 0; font-family: Georgia, serif; font-size: clamp(32px, 5vw, 52px); font-weight: 400; letter-spacing: -.04em; }
+    .intro p { color: #697069; font-size: 15px; line-height: 1.6; }
+    .gallery { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 38px 28px; }
+    .specimen { max-width: 100%; }
+    .specimen.wide { width: 100%; }
+    .specimen h2 { margin: 0 0 11px; font-size: 11px; font-weight: 700; letter-spacing: .12em; color: #697069; }
+    .frame { max-width: 100%; overflow-x: auto; padding-bottom: 3px; }
+    .ad { position: relative; flex: none; overflow: hidden; background: #f7f6ef; border: 1px solid #d5d9ce; color: #26332c; }
+    .ad-header { display: flex; align-items: center; justify-content: space-between; }
+    .brand { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 800; letter-spacing: .16em; white-space: nowrap; }
+    .brand-mark { width: 19px; height: 19px; display: grid; place-items: center; border-radius: 50%; background: #344a39; color: #f7f6ef; font-family: Georgia, serif; font-size: 13px; font-weight: 400; letter-spacing: 0; }
+    .header-note { color: #708071; font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+    .ad-footer { position: absolute; bottom: 0; left: 0; right: 0; display: flex; align-items: center; justify-content: space-between; color: #858b7f; font-size: 8px; line-height: 1; }
+    .ad-footer span:last-child { white-space: nowrap; }
+    .headline { font-family: Georgia, serif; font-weight: 400; letter-spacing: -.04em; }
+    .headline em { color: #768a6b; font-weight: 400; }
+    .kicker { color: #71846d; font-size: 9px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+    .product-visual { position: relative; display: grid; place-items: center; overflow: hidden; background: #e6eadf; }
+    .product-visual::before { content: ""; position: absolute; width: 73%; aspect-ratio: 1; border-radius: 50%; background: rgba(255,255,255,.32); }
+    .product-visual svg { position: relative; display: block; width: 100%; height: 100%; }
+    .sale-tag { position: absolute; z-index: 1; top: 10px; left: 10px; padding: 5px 7px; background: #fbfaf5; color: #556b54; font-size: 8px; font-weight: 700; letter-spacing: .1em; }
+    .product-title { margin: 0; font-family: Georgia, serif; font-weight: 400; }
+    .product-caption { margin: 0; color: #8a9385; font-size: 10px; }
+    .prices { display: flex; align-items: baseline; gap: 7px; white-space: nowrap; }
+    .price { color: #92988d; text-decoration: line-through; }
+    .sale-price { color: #3e6546; font-weight: 700; }
+    .controls { display: flex; align-items: center; gap: 7px; }
+    .arrow { flex: none; display: grid; place-items: center; width: 29px; height: 29px; padding: 0; border: 1px solid #b9c4b5; border-radius: 50%; background: transparent; color: #334d39; font-size: 18px; line-height: 1; cursor: pointer; }
+    .arrow:hover, .arrow:focus-visible { background: #334d39; color: white; outline: none; }
+    .counter { min-width: 32px; color: #8b9687; text-align: center; font-size: 9px; letter-spacing: .08em; }
+    .shop { display: inline-flex; align-items: center; justify-content: center; background: #344a39; color: #fff; font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+
+    .ad-300x250 { width: 300px; height: 250px; padding: 14px 15px; }
+    .ad-300x250 .header-note { font-size: 8px; }
+    .ad-300x250 .content { display: flex; gap: 13px; margin-top: 13px; }
+    .ad-300x250 .product-visual { width: 132px; height: 145px; flex: none; }
+    .ad-300x250 .product-info { min-width: 0; padding-top: 6px; }
+    .ad-300x250 .headline { margin: 4px 0 13px; font-size: 21px; line-height: 1.02; }
+    .ad-300x250 .product-title { font-size: 15px; line-height: 1.08; }
+    .ad-300x250 .product-caption { display: none; }
+    .ad-300x250 .prices { margin-top: 7px; font-size: 11px; }
+    .ad-300x250 .controls { margin-top: 11px; }
+    .ad-300x250 .arrow { width: 25px; height: 25px; font-size: 16px; }
+    .ad-300x250 .ad-footer { padding: 0 15px 11px; }
+
+    .ad-300x600 { width: 300px; height: 600px; padding: 20px; }
+    .ad-300x600 .intro-copy { margin-top: 35px; text-align: center; }
+    .ad-300x600 .headline { margin: 8px 0 5px; font-size: 35px; line-height: 1; }
+    .ad-300x600 .subhead { margin: 0; color: #7c897b; font-size: 11px; }
+    .ad-300x600 .product-visual { height: 240px; margin-top: 24px; }
+    .ad-300x600 .product-details { margin-top: 17px; }
+    .ad-300x600 .product-title { font-size: 20px; }
+    .ad-300x600 .product-caption { margin-top: 4px; }
+    .ad-300x600 .prices { margin-top: 9px; font-size: 13px; }
+    .ad-300x600 .bottom-row { display: flex; align-items: center; justify-content: space-between; margin-top: 16px; }
+    .ad-300x600 .shop { height: 34px; padding: 0 17px; }
+    .ad-300x600 .ad-footer { padding: 0 20px 13px; }
+
+    .ad-320x480 { width: 320px; height: 480px; padding: 17px; }
+    .ad-320x480 .intro-copy { margin: 20px 0 15px; text-align: center; }
+    .ad-320x480 .headline { margin: 5px 0 0; font-size: 29px; line-height: 1; }
+    .ad-320x480 .product-visual { height: 190px; }
+    .ad-320x480 .product-details { margin-top: 12px; }
+    .ad-320x480 .product-title { font-size: 19px; }
+    .ad-320x480 .product-caption { margin-top: 3px; }
+    .ad-320x480 .prices { margin-top: 6px; font-size: 12px; }
+    .ad-320x480 .bottom-row { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; }
+    .ad-320x480 .shop { height: 31px; padding: 0 15px; }
+    .ad-320x480 .ad-footer { padding: 0 17px 11px; }
+
+    .ad-728x90 { width: 728px; height: 90px; padding: 7px 12px; }
+    .ad-728x90 .ad-header { height: 14px; }
+    .ad-728x90 .brand { font-size: 9px; gap: 4px; }
+    .ad-728x90 .brand-mark { width: 13px; height: 13px; font-size: 9px; }
+    .ad-728x90 .header-note { font-size: 8px; }
+    .ad-728x90 .banner-body { display: flex; align-items: center; gap: 12px; height: 51px; }
+    .ad-728x90 .banner-title { width: 140px; flex: none; }
+    .ad-728x90 .headline { margin: 2px 0 0; font-size: 19px; line-height: 1; }
+    .ad-728x90 .kicker { font-size: 8px; }
+    .ad-728x90 .mini-products { display: flex; flex: 1; min-width: 0; gap: 10px; }
+    .ad-728x90 .mini-card { display: flex; align-items: center; gap: 8px; flex: 1; min-width: 0; }
+    .ad-728x90 .product-visual { width: 45px; height: 45px; flex: none; }
+    .ad-728x90 .product-title { overflow: hidden; font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
+    .ad-728x90 .prices { margin-top: 3px; font-size: 10px; }
+    .ad-728x90 .arrow { width: 24px; height: 24px; font-size: 15px; }
+    .ad-728x90 .counter { min-width: 25px; font-size: 8px; }
+    .ad-728x90 .ad-footer { padding: 0 12px 4px; font-size: 7px; }
+
+    .ad-970x250 { width: 970px; height: 250px; padding: 15px 19px; }
+    .ad-970x250 .banner-body { display: flex; align-items: center; gap: 17px; margin-top: 14px; }
+    .ad-970x250 .banner-title { width: 186px; flex: none; }
+    .ad-970x250 .headline { margin: 8px 0 9px; font-size: 34px; line-height: 1.02; }
+    .ad-970x250 .subhead { color: #829080; font-size: 11px; line-height: 1.5; }
+    .ad-970x250 .controls { margin-top: 17px; }
+    .ad-970x250 .mini-products { display: flex; flex: 1; gap: 13px; min-width: 0; }
+    .ad-970x250 .mini-card { flex: 1; min-width: 0; }
+    .ad-970x250 .product-visual { height: 108px; }
+    .ad-970x250 .product-title { margin-top: 8px; overflow: hidden; font-size: 15px; text-overflow: ellipsis; white-space: nowrap; }
+    .ad-970x250 .prices { margin-top: 4px; font-size: 11px; }
+    .ad-970x250 .ad-footer { padding: 0 19px 10px; }
+    @media (max-width: 600px) { .page { padding: 32px 16px 60px; } .intro { margin-bottom: 30px; } }
+  </style>
+</head>
+<body>
+  <svg aria-hidden="true" width="0" height="0" style="position:absolute">
+    <symbol id="art-lamp" viewBox="0 0 200 200">
+      <ellipse cx="100" cy="176" rx="53" ry="7" fill="#c8d0bf"/>
+      <path d="M75 162h50l-5 10H80z" fill="#53634f"/><path d="M97 86h6v78h-6z" fill="#75836a"/>
+      <path d="M67 87 81 39h38l14 48z" fill="#f3eee1" stroke="#dedaca" stroke-width="2"/>
+      <path d="M68 87h64" stroke="#cfc8b5" stroke-width="2"/><path d="M93 39v-7h14v7" fill="#75836a"/>
+    </symbol>
+    <symbol id="art-vase" viewBox="0 0 200 200">
+      <ellipse cx="100" cy="177" rx="47" ry="7" fill="#c8d0bf"/>
+      <path d="M91 69c-2-23-8-34-18-48M99 69c2-29 13-38 25-49M103 69c10-20 23-25 34-28" fill="none" stroke="#718269" stroke-width="3"/>
+      <path d="M76 29c-11-3-15-9-15-16 9 1 16 6 15 16M120 29c0-9 5-15 13-17 1 8-3 15-13 17M131 47c1-8 7-13 15-13-1 8-6 13-15 13" fill="#8fa084"/>
+      <path d="M81 63h38l-4 23c0 12 20 24 20 51 0 25-15 37-35 37s-35-12-35-37c0-27 20-39 20-51z" fill="#c38e71"/>
+      <path d="M82 64h36" stroke="#aa795e" stroke-width="4"/><path d="M77 130c-1 21 5 31 16 36" fill="none" stroke="#d7a98f" stroke-width="4" opacity=".7"/>
+    </symbol>
+    <symbol id="art-throw" viewBox="0 0 200 200">
+      <ellipse cx="100" cy="171" rx="57" ry="7" fill="#c8d0bf"/>
+      <path d="M45 77 88 47l67 28v73l-45 21-65-29z" fill="#bdad91"/>
+      <path d="M45 77 110 105l45-30-67-28z" fill="#ded2ba"/>
+      <path d="M110 105v64M55 91l55 24M55 102l55 24M55 113l55 24M55 124l55 24" stroke="#a4967e" stroke-width="2" opacity=".6"/>
+      <path d="m51 144 1 10m9-6 1 10m9-6 1 10m9-6 1 10m9-6 1 10m9-6 1 10" stroke="#a4967e" stroke-width="2"/>
+    </symbol>
+    <symbol id="art-candle" viewBox="0 0 200 200">
+      <ellipse cx="100" cy="173" rx="48" ry="7" fill="#c8d0bf"/>
+      <path d="M65 72h70l-5 81c-1 12-10 18-30 18s-29-6-30-18z" fill="#eee7d7"/>
+      <ellipse cx="100" cy="72" rx="35" ry="10" fill="#d2c9b6"/><ellipse cx="100" cy="72" rx="30" ry="7" fill="#f7f3e8"/>
+      <path d="M100 72v-9" stroke="#524e43" stroke-width="2"/><path d="M100 61c-7-7 0-13 1-17 4 7 8 12-1 17" fill="#d69f5d"/>
+      <rect x="78" y="106" width="44" height="32" fill="#d9e0d1"/><path d="M87 116h26M91 122h18M94 128h12" stroke="#82927b" stroke-width="1.5"/>
+    </symbol>
+    <symbol id="art-bowl" viewBox="0 0 200 200">
+      <ellipse cx="100" cy="163" rx="58" ry="7" fill="#c8d0bf"/>
+      <path d="M46 102c2 35 21 57 54 57s52-22 54-57z" fill="#b9a68e"/>
+      <ellipse cx="100" cy="102" rx="54" ry="17" fill="#d8cab6"/><ellipse cx="100" cy="103" rx="45" ry="11" fill="#c5b49c"/>
+      <path d="M61 123c6 15 16 23 25 26" fill="none" stroke="#d8cab6" stroke-width="3" opacity=".6"/>
+      <path d="M84 160h32" stroke="#9e8d77" stroke-width="4" stroke-linecap="round"/>
+    </symbol>
+  </svg>
+  <main class="page">
+    <div class="intro">
+      <div class="eyebrow">Creative collection / 01</div>
+      <h1>A little more lovely.</h1>
+      <p>Five ready-to-preview placements for a fictional homewares brand. Use the arrows in each ad to explore the collection.</p>
+    </div>
+    <div class="gallery">
+      <section class="specimen"><h2>MEDIUM RECTANGLE &nbsp; / &nbsp; 300 × 250</h2><div class="frame"><div class="ad ad-300x250" data-format="rectangle"></div></div></section>
+      <section class="specimen"><h2>HALF PAGE &nbsp; / &nbsp; 300 × 600</h2><div class="frame"><div class="ad ad-300x600" data-format="tall"></div></div></section>
+      <section class="specimen"><h2>MOBILE INTERSTITIAL &nbsp; / &nbsp; 320 × 480</h2><div class="frame"><div class="ad ad-320x480" data-format="mobile"></div></div></section>
+      <section class="specimen wide"><h2>LEADERBOARD &nbsp; / &nbsp; 728 × 90</h2><div class="frame"><div class="ad ad-728x90" data-format="leaderboard"></div></div></section>
+      <section class="specimen wide"><h2>BILLBOARD &nbsp; / &nbsp; 970 × 250</h2><div class="frame"><div class="ad ad-970x250" data-format="billboard"></div></div></section>
+    </div>
+  </main>
+  <script>
+    const products = [
+      { title: 'The Grove Lamp', description: 'A warm little glow', price: '$89', sale: '$69', art: 'lamp' },
+      { title: 'Terra Bud Vase', description: 'A home for your stems', price: '$48', sale: '$36', art: 'vase' },
+      { title: 'Everyday Throw', description: 'Softness for slow days', price: '$78', sale: '$59', art: 'throw' },
+      { title: 'Sunday Candle', description: 'Your moment of calm', price: '$32', sale: '$24', art: 'candle' },
+      { title: 'Gather Bowl', description: 'Made for the table', price: '$56', sale: '$42', art: 'bowl' }
+    ];
+    const header = '<header class="ad-header"><div class="brand"><span class="brand-mark">n</span>NEST &amp; CO.</div><span class="header-note">Thoughtful living</span></header>';
+    const footer = '<footer class="ad-footer"><span>Prices shown are illustrative. Terms apply.</span><span>© 2026 NEST &amp; CO.</span></footer>';
+    const controls = '<div class="controls"><button class="arrow prev" type="button" aria-label="Previous products">←</button><span class="counter"></span><button class="arrow next" type="button" aria-label="Next products">→</button></div>';
+    const visual = (p, tag = false) => `<div class="product-visual" role="img" aria-label="Illustration of ${p.title}">${tag ? '<span class="sale-tag">ON SALE</span>' : ''}<svg viewBox="0 0 200 200" aria-hidden="true"><use href="#art-${p.art}"></use></svg></div>`;
+    const details = p => `<div class="product-details"><h3 class="product-title">${p.title}</h3><p class="product-caption">${p.description}</p><div class="prices"><span class="price"><span class="sr-only">Regular price </span>${p.price}</span><span class="sale-price"><span class="sr-only">Sale price </span>${p.sale}</span></div></div>`;
+    const miniCard = p => `<div class="mini-card">${visual(p)}${details(p)}</div>`;
+    const srStyle = document.createElement('style');
+    srStyle.textContent = '.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}';
+    document.head.appendChild(srStyle);
+
+    document.querySelectorAll('.ad').forEach(ad => {
+      const format = ad.dataset.format;
+      let index = 0;
+      const render = () => {
+        const p = products[index];
+        let body;
+        if (format === 'rectangle') {
+          body = `<div class="content">${visual(p, true)}<div class="product-info"><div class="kicker">Little joys</div><div class="headline">Good things,<br><em>for less.</em></div>${details(p)}${controls}</div></div>`;
+        } else if (format === 'tall' || format === 'mobile') {
+          body = `<div class="intro-copy"><div class="kicker">The considered home</div><div class="headline">Make room<br>for <em>lovely.</em></div>${format === 'tall' ? '<p class="subhead">Everyday favorites, a little less.</p>' : ''}</div>${visual(p, true)}${details(p)}<div class="bottom-row">${controls}<span class="shop">The sale edit</span></div>`;
+        } else {
+          const count = format === 'leaderboard' ? 2 : 3;
+          const cards = Array.from({ length: count }, (_, i) => miniCard(products[(index + i) % products.length])).join('');
+          body = `<div class="banner-body"><div class="banner-title"><div class="kicker">The sale edit</div><div class="headline">Good things,<br><em>for less.</em></div>${format === 'billboard' ? '<div class="subhead">Thoughtful pieces for<br>the spaces you love.</div>' + controls : ''}</div><div class="mini-products">${cards}</div>${format === 'leaderboard' ? controls : ''}</div>`;
+        }
+        ad.innerHTML = `${header}<div class="carousel" aria-live="polite">${body}</div>${footer}`;
+        ad.querySelector('.counter').textContent = `${String(index + 1).padStart(2, '0')} / 05`;
+        ad.querySelector('.prev').addEventListener('click', () => move(-1, 'prev'));
+        ad.querySelector('.next').addEventListener('click', () => move(1, 'next'));
+      };
+      const move = (direction, focus) => {
+        index = (index + direction + products.length) % products.length;
+        render();
+        ad.querySelector(`.${focus}`).focus();
+      };
+      render();
+    });
+  </script>
+</body>
+</html>

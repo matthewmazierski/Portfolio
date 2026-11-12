@@ -1,0 +1,14 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Open google_ads_v02.html",
+            "file": "/Users/maciejmazierski/Library/CloudStorage/GoogleDrive-mazierskimatt@gmail.com/My Drive/Me/Resume_2026/Portoflio_Page/Portfolio/google_ads_v02.html"
+        }
+    ]
+}

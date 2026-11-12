@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Creative Delivery Workflow</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@500&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        min-width: 320px;
+        min-height: 100%;
+      }
+
+      body {
+        color: #17211d;
+        background: #f2f5f1;
+        font-family: "Manrope", sans-serif;
+        font-synthesis: none;
+        text-rendering: optimizeLegibility;
+      }
+
+      .page-shell {
+        min-height: 100vh;
+        padding: clamp(48px, 7vw, 92px) clamp(20px, 4.5vw, 72px) 44px;
+        overflow: hidden;
+        background:
+          radial-gradient(circle at 12% 18%, rgba(15, 157, 88, 0.08), transparent 24%),
+          radial-gradient(circle at 89% 77%, rgba(39, 92, 246, 0.07), transparent 24%),
+          linear-gradient(rgba(23, 33, 29, 0.035) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(23, 33, 29, 0.035) 1px, transparent 1px),
+          #f5f7f3;
+        background-size: auto, auto, 32px 32px, 32px 32px, auto;
+      }
+
+      .workflow {
+        width: min(1440px, 100%);
+        margin: 0 auto;
+      }
+
+      .workflow-header {
+        max-width: 680px;
+        margin-bottom: clamp(44px, 6vw, 72px);
+      }
+
+      .eyebrow,
+      .step-label {
+        margin: 0;
+        color: #64736b;
+        font-family: "DM Mono", monospace;
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 12px 0 0;
+        font-size: clamp(34px, 4.2vw, 56px);
+        font-weight: 700;
+        letter-spacing: -0.045em;
+        line-height: 1.05;
+      }
+
+      .subtitle {
+        max-width: 570px;
+        margin: 18px 0 0;
+        color: #617068;
+        font-size: 16px;
+        line-height: 1.65;
+      }
+
+      .workflow-footer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        margin-bottom: 32px;
+        color: #7d8b83;
+        font-family: "DM Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .workflow-footer-label {
+        font-size: 20px;
+      }
+
+      .footer-line {
+        width: 34px;
+        height: 1px;
+        background: #c9d0cc;
+      }
+
+      .flow {
+        display: grid;
+        grid-template-columns:
+          minmax(210px, 0.72fr) 72px minmax(310px, 1fr) 72px
+          minmax(390px, 1.35fr);
+        align-items: stretch;
+      }
+
+      .card {
+        position: relative;
+        min-height: 440px;
+        padding: clamp(22px, 2vw, 30px);
+        border: 1px solid rgba(28, 50, 40, 0.11);
+        border-radius: 4px;
+        background: rgba(255, 255, 255, 0.91);
+        box-shadow:
+          0 1px 0 rgba(255, 255, 255, 0.9) inset,
+          0 18px 50px rgba(33, 49, 41, 0.075);
+        backdrop-filter: blur(12px);
+      }
+
+      .card::before {
+        position: absolute;
+        top: -1px;
+        right: 20px;
+        left: 20px;
+        height: 3px;
+        border-radius: 0 0 3px 3px;
+        content: "";
+      }
+
+      .card-sheets {
+        height: 470px;
+      }
+
+      .card-sheets::before {
+        background: #0f9d58;
+      }
+
+      .card-cloud::before {
+        background: #4285f4;
+      }
+
+      .card-creative::before {
+        background: linear-gradient(90deg, #e34f26 0 33%, #f1c40f 33% 66%, #2965f1 66%);
+      }
+
+      .card-top {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .icon-box {
+        display: grid;
+        width: 48px;
+        height: 48px;
+        flex: 0 0 auto;
+        place-items: center;
+        border-radius: 12px;
+      }
+
+      .icon-box svg {
+        width: 28px;
+        height: 28px;
+      }
+
+      .sheets-box {
+        background: #e9f7ef;
+      }
+
+      .cloud-box {
+        color: #4285f4;
+        background: #eaf2ff;
+      }
+
+      .code-box {
+        color: #263b32;
+        background: #edf0ec;
+      }
+
+      h2,
+      h3,
+      h4 {
+        margin: 0;
+      }
+
+      .card h2 {
+        margin-top: 4px;
+        font-size: clamp(20px, 1.7vw, 25px);
+        font-weight: 700;
+        letter-spacing: -0.035em;
+        line-height: 1.15;
+      }
+
+      .card-rule {
+        height: 1px;
+        margin: 24px 0 28px;
+        background: #e5eae6;
+      }
+
+      .simple-content {
+        padding: 4px 2px;
+      }
+
+      .leaf {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        color: #46554d;
+        font-size: 13px;
+        font-weight: 500;
+        line-height: 1.45;
+      }
+
+      .leaf-dot {
+        width: 5px;
+        height: 5px;
+        flex: 0 0 auto;
+        margin-top: 7px;
+        border-radius: 50%;
+        background: #9aa69f;
+      }
+
+      .tree h3,
+      .tech-heading h3 {
+        color: #2a3932;
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      .branch {
+        position: relative;
+        display: flex;
+        gap: 13px;
+      }
+
+      .branch-line {
+        width: 1px;
+        flex: 0 0 1px;
+        background: #dce3de;
+      }
+
+      .level-1 {
+        min-height: 245px;
+      }
+
+      .level-2,
+      .level-3 {
+        margin-top: 20px;
+      }
+
+      .level-2 {
+        min-height: 190px;
+      }
+
+      .level-3 {
+        min-height: 130px;
+      }
+
+      .leaf-list {
+        display: grid;
+        gap: 10px;
+        margin-top: 12px;
+      }
+
+      .connector {
+        display: flex;
+        align-items: center;
+        align-self: center;
+        color: #8b9891;
+      }
+
+      .connector-line {
+        width: calc(100% - 10px);
+        height: 1px;
+        background: #aeb9b3;
+      }
+
+      .connector svg {
+        width: 13px;
+        height: 13px;
+        margin-left: -4px;
+        overflow: visible;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.4;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .creative-grid {
+        display: grid;
+        gap: 20px;
+      }
+
+      .tech-group {
+        padding-bottom: 19px;
+        border-bottom: 1px solid #edf0ee;
+      }
+
+      .tech-group:last-child {
+        padding-bottom: 0;
+        border-bottom: 0;
+      }
+
+      .tech-heading {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .tech-badge {
+        display: grid;
+        width: 27px;
+        height: 27px;
+        place-items: center;
+        border-radius: 6px;
+        color: white;
+        font-family: "DM Mono", monospace;
+        font-size: 10px;
+        font-weight: 500;
+      }
+
+      .html-badge {
+        background: #e34f26;
+      }
+
+      .js-badge {
+        color: #272317;
+        background: #f1c40f;
+      }
+
+      .css-badge {
+        background: #2965f1;
+      }
+
+      .indented {
+        margin-left: 37px;
+      }
+
+      .subtree {
+        margin-top: 12px;
+        padding-left: 13px;
+        border-left: 1px solid #dce3de;
+      }
+
+      .subtree h4 {
+        color: #65736b;
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      @media (max-width: 1080px) {
+        .flow {
+          grid-template-columns: 1fr 54px 1.15fr;
+        }
+
+        .card-creative {
+          grid-column: 1 / -1;
+          min-height: auto;
+          margin-top: 54px;
+        }
+
+        .card-cloud + .connector {
+          position: absolute;
+          visibility: hidden;
+        }
+
+        .creative-grid {
+          grid-template-columns: 0.8fr 1.5fr 0.8fr;
+          align-items: start;
+        }
+
+        .tech-group {
+          min-height: 126px;
+          padding: 0 20px;
+          border-right: 1px solid #edf0ee;
+          border-bottom: 0;
+        }
+
+        .tech-group:first-child {
+          padding-left: 0;
+        }
+
+        .tech-group:last-child {
+          padding-right: 0;
+          border-right: 0;
+        }
+      }
+
+      @media (max-width: 680px) {
+        .page-shell {
+          padding: 44px 18px 36px;
+        }
+
+        .workflow-header {
+          margin-bottom: 36px;
+        }
+
+        .flow {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .card {
+          min-height: auto;
+          padding: 24px;
+        }
+
+        .card-sheets {
+          min-height: 200px;
+        }
+
+        .card-creative {
+          margin-top: 0;
+        }
+
+        .connector,
+        .card-cloud + .connector {
+          position: relative;
+          display: flex;
+          width: 24px;
+          height: 54px;
+          align-self: center;
+          visibility: visible;
+          transform: rotate(90deg);
+        }
+
+        .creative-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .tech-group {
+          min-height: auto;
+          padding: 0 0 19px;
+          border-right: 0;
+          border-bottom: 1px solid #edf0ee;
+        }
+
+        .workflow-footer {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page-shell">
+      <section class="workflow" aria-labelledby="workflow-title">
+        <header class="workflow-header">
+          <p class="eyebrow">System architecture</p>
+          <h1 id="workflow-title">Creative delivery workflow</h1>
+          <p class="subtitle">
+            Product data flows through a cloud service and into a dynamic HTML creative.
+          </p>
+        </header>
+
+        <footer class="workflow-footer">
+          <span class="workflow-footer-label">Data source</span>
+          <span class="footer-line"></span>
+          <span class="workflow-footer-label">API transformation</span>
+          <span class="footer-line"></span>
+          <span class="workflow-footer-label">Dynamic output</span>
+        </footer>
+
+        <div class="flow" aria-label="Workflow from Google Sheets to HTML Creative">
+          <article class="card card-sheets">
+            <div class="card-top">
+              <div class="icon-box sheets-box">
+                <svg viewBox="0 0 32 32" aria-hidden="true">
+                  <path fill="#0F9D58" d="M6 3h14l6 6v20H6z"></path>
+                  <path fill="#87D7AE" d="M20 3v6h6z"></path>
+                  <path fill="none" stroke="#fff" stroke-width="1.5" d="M10 14.5h12M10 19h12M10 23.5h12M14 13v12M19 13v12"></path>
+                </svg>
+              </div>
+              <div>
+                <p class="step-label">Source</p>
+                <h2>Google Sheets</h2>
+              </div>
+            </div>
+            <div class="card-rule"></div>
+            <div class="simple-content">
+              <div class="leaf"><span class="leaf-dot"></span><span>Product list</span></div>
+            </div>
+          </article>
+
+          <div class="connector" aria-hidden="true">
+            <span class="connector-line"></span>
+            <svg viewBox="0 0 14 14"><path d="m4 2 5 5-5 5"></path></svg>
+          </div>
+
+          <article class="card card-cloud">
+            <div class="card-top">
+              <div class="icon-box cloud-box">
+                <svg viewBox="0 0 32 32" aria-hidden="true">
+                  <path fill="currentColor" d="M20.4 9.2a8 8 0 0 0-14.9 3.9A6.5 6.5 0 0 0 7 26h13.8a7.2 7.2 0 0 0-.4-16.8Zm.4 13.8H7a3.5 3.5 0 0 1-.2-7l1.8-.1-.1-1.8a5 5 0 0 1 9.7-1.9l.6 1.5 1.5-.8a4.2 4.2 0 0 1 4 7.4 4.3 4.3 0 0 1-3.5 2.7Z"></path>
+                </svg>
+              </div>
+              <div>
+                <p class="step-label">Processing</p>
+                <h2>Cloud Run API</h2>
+              </div>
+            </div>
+            <div class="card-rule"></div>
+            <div class="tree">
+              <div class="branch level-1">
+                <span class="branch-line"></span>
+                <div>
+                  <h3>Google Cloud</h3>
+                  <div class="branch level-2">
+                    <span class="branch-line"></span>
+                    <div>
+                      <h3>Google Cloud Run Functions</h3>
+                      <div class="branch level-3">
+                        <span class="branch-line"></span>
+                        <div>
+                          <h3>Python 3.12</h3>
+                          <div class="leaf-list">
+                            <div class="leaf"><span class="leaf-dot"></span><span>functions_framework</span></div>
+                            <div class="leaf"><span class="leaf-dot"></span><span>CSV</span></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <div class="connector" aria-hidden="true">
+            <span class="connector-line"></span>
+            <svg viewBox="0 0 14 14"><path d="m4 2 5 5-5 5"></path></svg>
+          </div>
+
+          <article class="card card-creative">
+            <div class="card-top">
+              <div class="icon-box code-box">
+                <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="m11 9-7 7 7 7M21 9l7 7-7 7M18 6l-4 20"></path>
+                </svg>
+              </div>
+              <div>
+                <p class="step-label">Output</p>
+                <h2>HTML Creative</h2>
+              </div>
+            </div>
+            <div class="card-rule"></div>
+            <div class="creative-grid">
+              <section class="tech-group">
+                <div class="tech-heading"><span class="tech-badge html-badge">H</span><h3>HTML</h3></div>
+                <div class="leaf-list indented">
+                  <div class="leaf"><span class="leaf-dot"></span><span>Creative elements</span></div>
+                </div>
+              </section>
+              <section class="tech-group">
+                <div class="tech-heading"><span class="tech-badge js-badge">JS</span><h3>JavaScript</h3></div>
+                <div class="subtree indented">
+                  <h4>Ad functionality</h4>
+                  <div class="leaf-list">
+                    <div class="leaf"><span class="leaf-dot"></span><span>API call and Creative population</span></div>
+                    <div class="leaf"><span class="leaf-dot"></span><span>Arrow and Background clicks</span></div>
+                  </div>
+                </div>
+              </section>
+              <section class="tech-group">
+                <div class="tech-heading"><span class="tech-badge css-badge">#</span><h3>CSS</h3></div>
+                <div class="leaf-list indented">
+                  <div class="leaf"><span class="leaf-dot"></span><span>Ad visual</span></div>
+                </div>
+              </section>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

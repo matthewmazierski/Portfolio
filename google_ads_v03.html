@@ -1,0 +1,668 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Five product carousel ad sizes</title>
+  <style>
+    :root { color-scheme: light; font-family: Arial, Helvetica, sans-serif; color: #FFFFFF; background: #182437; }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+
+    /* Top navigation */
+    .topnav { position: sticky; top: 0; z-index: 10; background: #182437; border-bottom: 1px solid #2c3b54; }
+    .topnav-inner { max-width: 1180px; margin: auto; padding: 14px 24px; display: flex; gap: 8px; overflow-x: auto; }
+    .nav-btn { flex: none; appearance: none; font: inherit; font-size: 14px; font-weight: 700; color: #aab6c8; background: transparent; border: 1px solid #2c3b54; border-radius: 999px; padding: 10px 20px; cursor: pointer; transition: background .15s, color .15s, border-color .15s; }
+    .nav-btn:hover { color: #FFFFFF; border-color: #55678a; }
+    .nav-btn[aria-selected="true"] { color: #182437; background: #f7f6ef; border-color: #f7f6ef; }
+    .nav-btn:focus-visible { outline: 2px solid #FFFFFF; outline-offset: 2px; }
+
+    .page { max-width: 1180px; margin: auto; padding: 48px 24px 80px; }
+    .panel[hidden] { display: none; }
+    .intro { max-width: 680px; margin-bottom: 42px; }
+    .eyebrow { color: #697662; font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+    h1 { margin: 12px 0; font-family: Georgia, serif; font-size: clamp(32px, 5vw, 52px); font-weight: 400; letter-spacing: -.04em; }
+    .intro p { color: #697069; font-size: 15px; line-height: 1.6; }
+    .gallery { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 38px 28px; }
+    .specimen { max-width: 100%; }
+    .specimen.wide { width: 100%; }
+    .specimen h2 { margin: 0 0 11px; font-size: 11px; font-weight: 700; letter-spacing: .12em; color: #aab6c8; }
+    .frame { max-width: 100%; overflow-x: auto; padding-bottom: 3px; }
+    .ad-frame { display: block; flex: none; box-sizing: content-box; max-width: none; background: #f7f6ef; }
+
+    /* Empty states for tabs that have no content yet */
+    .empty { max-width: 520px; padding: 28px; border: 1px dashed #2c3b54; border-radius: 8px; color: #aab6c8; font-size: 15px; line-height: 1.6; }
+    .empty strong { display: block; margin-bottom: 6px; color: #FFFFFF; font-size: 16px; }
+
+    @media (max-width: 600px) {
+      .page { padding: 32px 16px 60px; }
+      .topnav-inner { padding: 12px 16px; }
+      .intro { margin-bottom: 30px; }
+    }
+
+
+    .page-shell {
+        min-height: 100vh;
+        padding: clamp(48px, 7vw, 92px) clamp(20px, 4.5vw, 72px) 44px;
+        overflow: hidden;
+        background:
+          radial-gradient(circle at 12% 18%, rgba(15, 157, 88, 0.08), transparent 24%),
+          radial-gradient(circle at 89% 77%, rgba(39, 92, 246, 0.07), transparent 24%),
+          linear-gradient(rgba(23, 33, 29, 0.035) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(23, 33, 29, 0.035) 1px, transparent 1px),
+          #f5f7f3;
+        background-size: auto, auto, 32px 32px, 32px 32px, auto;
+      }
+
+      .workflow {
+        width: min(1440px, 100%);
+        margin: 0 auto;
+      }
+
+      .workflow-header {
+        max-width: 680px;
+        margin-bottom: clamp(44px, 6vw, 72px);
+      }
+
+      .eyebrow,
+      .step-label {
+        margin: 0;
+        color: #64736b;
+        font-family: "DM Mono", monospace;
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 12px 0 0;
+        font-size: clamp(34px, 4.2vw, 56px);
+        font-weight: 700;
+        letter-spacing: -0.045em;
+        line-height: 1.05;
+      }
+
+      .subtitle {
+        max-width: 570px;
+        margin: 18px 0 0;
+        color: #617068;
+        font-size: 16px;
+        line-height: 1.65;
+      }
+
+      .workflow-footer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        margin-bottom: 32px;
+        color: #7d8b83;
+        font-family: "DM Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .workflow-footer-label {
+        font-size: 20px;
+      }
+
+      .footer-line {
+        width: 34px;
+        height: 1px;
+        background: #c9d0cc;
+      }
+
+      .flow {
+        display: grid;
+        grid-template-columns:
+          minmax(210px, 0.72fr) 72px minmax(310px, 1fr) 72px
+          minmax(390px, 1.35fr);
+        align-items: stretch;
+      }
+
+      .card {
+        position: relative;
+        min-height: 440px;
+        padding: clamp(22px, 2vw, 30px);
+        border: 1px solid rgba(28, 50, 40, 0.11);
+        border-radius: 4px;
+        background: rgba(255, 255, 255, 0.91);
+        box-shadow:
+          0 1px 0 rgba(255, 255, 255, 0.9) inset,
+          0 18px 50px rgba(33, 49, 41, 0.075);
+        backdrop-filter: blur(12px);
+      }
+
+      .card::before {
+        position: absolute;
+        top: -1px;
+        right: 20px;
+        left: 20px;
+        height: 3px;
+        border-radius: 0 0 3px 3px;
+        content: "";
+      }
+
+      .card-sheets {
+        height: 470px;
+      }
+
+      .card-sheets::before {
+        background: #0f9d58;
+      }
+
+      .card-cloud::before {
+        background: #4285f4;
+      }
+
+      .card-creative::before {
+        background: linear-gradient(90deg, #e34f26 0 33%, #f1c40f 33% 66%, #2965f1 66%);
+      }
+
+      .card-top {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .icon-box {
+        display: grid;
+        width: 48px;
+        height: 48px;
+        flex: 0 0 auto;
+        place-items: center;
+        border-radius: 12px;
+      }
+
+      .icon-box svg {
+        width: 28px;
+        height: 28px;
+      }
+
+      .sheets-box {
+        background: #e9f7ef;
+      }
+
+      .cloud-box {
+        color: #4285f4;
+        background: #eaf2ff;
+      }
+
+      .code-box {
+        color: #263b32;
+        background: #edf0ec;
+      }
+
+      h2,
+      h3,
+      h4 {
+        margin: 0;
+      }
+
+      .card h2 {
+        margin-top: 4px;
+        font-size: clamp(20px, 1.7vw, 25px);
+        font-weight: 700;
+        letter-spacing: -0.035em;
+        line-height: 1.15;
+      }
+
+      .card-rule {
+        height: 1px;
+        margin: 24px 0 28px;
+        background: #e5eae6;
+      }
+
+      .simple-content {
+        padding: 4px 2px;
+      }
+
+      .leaf {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        color: #46554d;
+        font-size: 13px;
+        font-weight: 500;
+        line-height: 1.45;
+      }
+
+      .leaf-dot {
+        width: 5px;
+        height: 5px;
+        flex: 0 0 auto;
+        margin-top: 7px;
+        border-radius: 50%;
+        background: #9aa69f;
+      }
+
+      .tree h3,
+      .tech-heading h3 {
+        color: #2a3932;
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      .branch {
+        position: relative;
+        display: flex;
+        gap: 13px;
+      }
+
+      .branch-line {
+        width: 1px;
+        flex: 0 0 1px;
+        background: #dce3de;
+      }
+
+      .level-1 {
+        min-height: 245px;
+      }
+
+      .level-2,
+      .level-3 {
+        margin-top: 20px;
+      }
+
+      .level-2 {
+        min-height: 190px;
+      }
+
+      .level-3 {
+        min-height: 130px;
+      }
+
+      .leaf-list {
+        display: grid;
+        gap: 10px;
+        margin-top: 12px;
+      }
+
+      .connector {
+        display: flex;
+        align-items: center;
+        align-self: center;
+        color: #8b9891;
+      }
+
+      .connector-line {
+        width: calc(100% - 10px);
+        height: 1px;
+        background: #aeb9b3;
+      }
+
+      .connector svg {
+        width: 13px;
+        height: 13px;
+        margin-left: -4px;
+        overflow: visible;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.4;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .creative-grid {
+        display: grid;
+        gap: 20px;
+      }
+
+      .tech-group {
+        padding-bottom: 19px;
+        border-bottom: 1px solid #edf0ee;
+      }
+
+      .tech-group:last-child {
+        padding-bottom: 0;
+        border-bottom: 0;
+      }
+
+      .tech-heading {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .tech-badge {
+        display: grid;
+        width: 27px;
+        height: 27px;
+        place-items: center;
+        border-radius: 6px;
+        color: white;
+        font-family: "DM Mono", monospace;
+        font-size: 10px;
+        font-weight: 500;
+      }
+
+      .html-badge {
+        background: #e34f26;
+      }
+
+      .js-badge {
+        color: #272317;
+        background: #f1c40f;
+      }
+
+      .css-badge {
+        background: #2965f1;
+      }
+
+      .indented {
+        margin-left: 37px;
+      }
+
+      .subtree {
+        margin-top: 12px;
+        padding-left: 13px;
+        border-left: 1px solid #dce3de;
+      }
+
+      .subtree h4 {
+        color: #65736b;
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      @media (max-width: 1080px) {
+        .flow {
+          grid-template-columns: 1fr 54px 1.15fr;
+        }
+
+        .card-creative {
+          grid-column: 1 / -1;
+          min-height: auto;
+          margin-top: 54px;
+        }
+
+        .card-cloud + .connector {
+          position: absolute;
+          visibility: hidden;
+        }
+
+        .creative-grid {
+          grid-template-columns: 0.8fr 1.5fr 0.8fr;
+          align-items: start;
+        }
+
+        .tech-group {
+          min-height: 126px;
+          padding: 0 20px;
+          border-right: 1px solid #edf0ee;
+          border-bottom: 0;
+        }
+
+        .tech-group:first-child {
+          padding-left: 0;
+        }
+
+        .tech-group:last-child {
+          padding-right: 0;
+          border-right: 0;
+        }
+      }
+
+      @media (max-width: 680px) {
+        .page-shell {
+          padding: 44px 18px 36px;
+        }
+
+        .workflow-header {
+          margin-bottom: 36px;
+        }
+
+        .flow {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .card {
+          min-height: auto;
+          padding: 24px;
+        }
+
+        .card-sheets {
+          min-height: 200px;
+        }
+
+        .card-creative {
+          margin-top: 0;
+        }
+
+        .connector,
+        .card-cloud + .connector {
+          position: relative;
+          display: flex;
+          width: 24px;
+          height: 54px;
+          align-self: center;
+          visibility: visible;
+          transform: rotate(90deg);
+        }
+
+        .creative-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .tech-group {
+          min-height: auto;
+          padding: 0 0 19px;
+          border-right: 0;
+          border-bottom: 1px solid #edf0ee;
+        }
+
+        .workflow-footer {
+          display: none;
+        }
+      }
+
+  </style>
+</head>
+<body>
+  <nav class="topnav" aria-label="Sections">
+    <div class="topnav-inner" role="tablist">
+      <button class="nav-btn" role="tab" id="tab-product" aria-controls="panel-product" aria-selected="true" data-view="product">Product Ads</button>
+      <button class="nav-btn" role="tab" id="tab-animated" aria-controls="panel-animated" aria-selected="false" data-view="animated" tabindex="-1">Animated Ads</button>
+      <button class="nav-btn" role="tab" id="tab-workflow" aria-controls="panel-workflow" aria-selected="false" data-view="workflow" tabindex="-1">Workflow Graph</button>
+    </div>
+  </nav>
+
+  <main class="page">
+    <!-- Product Ads -->
+    <div class="panel" id="panel-product" role="tabpanel" aria-labelledby="tab-product">
+      <div class="intro">
+        <div class="eyebrow">Creative collection / 01</div>
+        <h1>A little more lovely.</h1>
+        <p>Five ready-to-preview placements for a fictional homewares brand. Use the arrows in each ad to explore the collection.</p>
+      </div>
+      <div class="gallery">
+        <section class="specimen"><h2>HALF PAGE &nbsp; / &nbsp; 300 × 600</h2><div class="frame"><iframe class="ad-frame" src="EN_300x600/index.html" width="300" height="600" title="300x600 creative" scrolling="no" frameborder="0" loading="lazy"></iframe></div></section>
+        <section class="specimen"><h2>MOBILE INTERSTITIAL &nbsp; / &nbsp; 320 × 480</h2><div class="frame"><iframe class="ad-frame" src="EN_320x480/index.html" width="320" height="480" title="320x480 creative" scrolling="no" frameborder="0" loading="lazy"></iframe></div></section>
+        <section class="specimen"><h2>MEDIUM RECTANGLE &nbsp; / &nbsp; 300 × 250</h2><div class="frame"><iframe class="ad-frame" src="EN_300x250/index.html" width="300" height="250" title="300x250 creative" scrolling="no" frameborder="0" loading="lazy"></iframe></div></section>
+        <section class="specimen wide"><h2>BILLBOARD &nbsp; / &nbsp; 970 × 250</h2><div class="frame"><iframe class="ad-frame" src="EN_970x250/index.html" width="970" height="250" title="970x250 creative" scrolling="no" frameborder="0" loading="lazy"></iframe></div></section>
+        <section class="specimen wide"><h2>LEADERBOARD &nbsp; / &nbsp; 728 × 90</h2><div class="frame"><iframe class="ad-frame" src="EN_728x90/index.html" width="728" height="90" title="728x90 creative" scrolling="no" frameborder="0" loading="lazy"></iframe></div></section>
+      </div>
+    </div>
+
+    <!-- Animated Ads -->
+    <div class="panel" id="panel-animated" role="tabpanel" aria-labelledby="tab-animated" hidden>
+      <div class="intro">
+        <h1>Animated ads</h1>
+      </div>
+      <div class="empty"><strong>No animated ads yet</strong>Add your animated creatives to this section.</div>
+    </div>
+
+    <!-- Workflow Graph -->
+    <div class="panel" id="panel-workflow" role="tabpanel" aria-labelledby="tab-workflow" hidden>
+      <div class="intro">
+        
+        <section class="workflow" aria-labelledby="workflow-title">
+        <header class="workflow-header">
+          <p class="eyebrow">System architecture</p>
+          <h1 id="workflow-title">Creative delivery workflow</h1>
+          <p class="subtitle">
+            Product data flows through a cloud service and into a dynamic HTML creative.
+          </p>
+        </header>
+
+        <footer class="workflow-footer">
+          <span class="workflow-footer-label">Data source</span>
+          <span class="footer-line"></span>
+          <span class="workflow-footer-label">API transformation</span>
+          <span class="footer-line"></span>
+          <span class="workflow-footer-label">Dynamic output</span>
+        </footer>
+
+        <div class="flow" aria-label="Workflow from Google Sheets to HTML Creative">
+          <article class="card card-sheets">
+            <div class="card-top">
+              <div class="icon-box sheets-box">
+                <svg viewBox="0 0 32 32" aria-hidden="true">
+                  <path fill="#0F9D58" d="M6 3h14l6 6v20H6z"></path>
+                  <path fill="#87D7AE" d="M20 3v6h6z"></path>
+                  <path fill="none" stroke="#fff" stroke-width="1.5" d="M10 14.5h12M10 19h12M10 23.5h12M14 13v12M19 13v12"></path>
+                </svg>
+              </div>
+              <div>
+                <p class="step-label">Source</p>
+                <h2>Google Sheets</h2>
+              </div>
+            </div>
+            <div class="card-rule"></div>
+            <div class="simple-content">
+              <div class="leaf"><span class="leaf-dot"></span><span>Product list</span></div>
+            </div>
+          </article>
+
+          <div class="connector" aria-hidden="true">
+            <span class="connector-line"></span>
+            <svg viewBox="0 0 14 14"><path d="m4 2 5 5-5 5"></path></svg>
+          </div>
+
+          <article class="card card-cloud">
+            <div class="card-top">
+              <div class="icon-box cloud-box">
+                <svg viewBox="0 0 32 32" aria-hidden="true">
+                  <path fill="currentColor" d="M20.4 9.2a8 8 0 0 0-14.9 3.9A6.5 6.5 0 0 0 7 26h13.8a7.2 7.2 0 0 0-.4-16.8Zm.4 13.8H7a3.5 3.5 0 0 1-.2-7l1.8-.1-.1-1.8a5 5 0 0 1 9.7-1.9l.6 1.5 1.5-.8a4.2 4.2 0 0 1 4 7.4 4.3 4.3 0 0 1-3.5 2.7Z"></path>
+                </svg>
+              </div>
+              <div>
+                <p class="step-label">Processing</p>
+                <h2>Cloud Run API</h2>
+              </div>
+            </div>
+            <div class="card-rule"></div>
+            <div class="tree">
+              <div class="branch level-1">
+                <span class="branch-line"></span>
+                <div>
+                  <h3>Google Cloud</h3>
+                  <div class="branch level-2">
+                    <span class="branch-line"></span>
+                    <div>
+                      <h3>Google Cloud Run Functions</h3>
+                      <div class="branch level-3">
+                        <span class="branch-line"></span>
+                        <div>
+                          <h3>Python 3.12</h3>
+                          <div class="leaf-list">
+                            <div class="leaf"><span class="leaf-dot"></span><span>functions_framework</span></div>
+                            <div class="leaf"><span class="leaf-dot"></span><span>CSV</span></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <div class="connector" aria-hidden="true">
+            <span class="connector-line"></span>
+            <svg viewBox="0 0 14 14"><path d="m4 2 5 5-5 5"></path></svg>
+          </div>
+
+          <article class="card card-creative">
+            <div class="card-top">
+              <div class="icon-box code-box">
+                <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="m11 9-7 7 7 7M21 9l7 7-7 7M18 6l-4 20"></path>
+                </svg>
+              </div>
+              <div>
+                <p class="step-label">Output</p>
+                <h2>HTML Creative</h2>
+              </div>
+            </div>
+            <div class="card-rule"></div>
+            <div class="creative-grid">
+              <section class="tech-group">
+                <div class="tech-heading"><span class="tech-badge html-badge">H</span><h3>HTML</h3></div>
+                <div class="leaf-list indented">
+                  <div class="leaf"><span class="leaf-dot"></span><span>Creative elements</span></div>
+                </div>
+              </section>
+              <section class="tech-group">
+                <div class="tech-heading"><span class="tech-badge js-badge">JS</span><h3>JavaScript</h3></div>
+                <div class="subtree indented">
+                  <h4>Ad functionality</h4>
+                  <div class="leaf-list">
+                    <div class="leaf"><span class="leaf-dot"></span><span>API call and Creative population</span></div>
+                    <div class="leaf"><span class="leaf-dot"></span><span>Arrow and Background clicks</span></div>
+                  </div>
+                </div>
+              </section>
+              <section class="tech-group">
+                <div class="tech-heading"><span class="tech-badge css-badge">#</span><h3>CSS</h3></div>
+                <div class="leaf-list indented">
+                  <div class="leaf"><span class="leaf-dot"></span><span>Ad visual</span></div>
+                </div>
+              </section>
+            </div>
+          </article>
+        </div>
+      </section>
+        
+
+      </div>
+      
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      var tabs = Array.prototype.slice.call(document.querySelectorAll('.nav-btn'));
+      var views = tabs.map(function (t) { return t.dataset.view; });
+
+      function show(view, focus) {
+        if (views.indexOf(view) === -1) view = 'product';
+        tabs.forEach(function (t) {
+          var on = t.dataset.view === view;
+          t.setAttribute('aria-selected', on ? 'true' : 'false');
+          t.tabIndex = on ? 0 : -1;
+          document.getElementById('panel-' + t.dataset.view).hidden = !on;
+          if (on && focus) t.focus();
+        });
+        try { history.replaceState(null, '', '#' + view); } catch (e) { location.hash = view; }
+      }
+
+      tabs.forEach(function (t, i) {
+        t.addEventListener('click', function () { show(t.dataset.view); });
+        t.addEventListener('keydown', function (e) {
+          var next = null;
+          if (e.key === 'ArrowRight') next = (i + 1) % tabs.length;
+          if (e.key === 'ArrowLeft') next = (i - 1 + tabs.length) % tabs.length;
+          if (next !== null) { e.preventDefault(); show(views[next], true); }
+        });
+      });
+
+      window.addEventListener('hashchange', function () { show(location.hash.slice(1)); });
+      show(location.hash.slice(1));
+    })();
+  </script>
+</body>
+</html>

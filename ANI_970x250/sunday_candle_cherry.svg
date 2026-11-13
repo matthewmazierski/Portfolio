@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 227 116.408">
+  <defs>
+    <style>
+      .cls-1{fill:#4f6f52}
+      .cls-2{fill:#3d5b43}
+      .cls-3{fill:#b94432}
+      .cls-4{fill:#a93e2e}
+    </style>
+  </defs>
+  <title>Asset 1</title>
+  <g id="Layer_1" data-name="Layer 1">
+    <g>
+      <path d="M116 61.408 C98 31.408 76 11.408 52 3.408 C30 -3.592 11 0.408 0 13.408 C16 37.408 41 54.408 70 61.408 C88 66.408 104 65.408 116 61.408 Z" class="cls-1"/>
+      <path d="M114 61.408 C125 32.408 144 12.408 166 4.408 C189 -3.592 212 0.408 227 12.408 C212 36.408 189 52.408 162 60.408 C143 66.408 126 66.408 114 61.408 Z" class="cls-2"/>
+      <circle cx="101" cy="72.408" r="19" class="cls-3"/>
+      <circle cx="134" cy="75.408" r="19" class="cls-3"/>
+      <circle cx="118" cy="97.408" r="19" class="cls-4"/>
+    </g>
+  </g>
+</svg>

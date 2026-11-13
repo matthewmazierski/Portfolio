@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 262 370">
+  <defs>
+    <style>
+      .cls-1{fill:#c9d0c0}
+      .cls-2{fill:#eee9d8}
+      .cls-3{fill:#d0cbb8}
+      .cls-4{fill:#f8f7ef}
+      .cls-5{fill:#514c3f}
+      .cls-6{fill:#d99d57}
+      .cls-7{fill:#d9e0d2}
+      .cls-8{fill:none;stroke:#83967f;stroke-width:4;stroke-linecap:square}
+    </style>
+  </defs>
+  <title>Asset 1</title>
+  <g id="Layer_1" data-name="Layer 1">
+    <ellipse cx="131" cy="351" rx="131" ry="19" class="cls-1"/>
+    <path d="M36 76 C36 63 77 50 131 50 C185 50 226 63 226 76 L212 294 C210 328 185 345 131 345 C77 345 52 328 50 294 Z" class="cls-2"/>
+    <ellipse cx="131" cy="76" rx="95" ry="27" class="cls-3"/>
+    <ellipse cx="131" cy="76" rx="82" ry="18" class="cls-4"/>
+    <rect x="128" y="51" width="6" height="25" class="cls-5"/>
+    <path d="M133 0 C126 13 121 22 122 30 C123 38 127 43 132 46 C139 41 146 34 145 26 C144 17 138 8 133 0 Z" class="cls-6"/>
+    <rect x="71" y="168" width="120" height="87" class="cls-7"/>
+    <path d="M95.5 195.5 L166.5 195.5 M107 211.5 L155 211.5 M115 228 L147 228" class="cls-8"/>
+  </g>
+</svg>

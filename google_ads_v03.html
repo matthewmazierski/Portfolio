@@ -481,14 +481,14 @@
         <h1>A little more lovely.</h1>
         <p>Five ready-to-preview placements for a fictional homewares brand. Use the arrows in each ad to explore the collection.</p>
       </div>
-      <div class="gallery">
-        <section class="specimen"><h2>HALF PAGE &nbsp; / &nbsp; 300 × 600</h2><div class="frame"><iframe class="ad-frame" src="EN_300x600/index.html" width="300" height="600" title="300x600 creative" scrolling="no" frameborder="0" loading="lazy"></iframe></div></section>
-        <section class="specimen"><h2>MOBILE INTERSTITIAL &nbsp; / &nbsp; 320 × 480</h2><div class="frame"><iframe class="ad-frame" src="EN_320x480/index.html" width="320" height="480" title="320x480 creative" scrolling="no" frameborder="0" loading="lazy"></iframe></div></section>
-        <section class="specimen"><h2>MEDIUM RECTANGLE &nbsp; / &nbsp; 300 × 250</h2><div class="frame"><iframe class="ad-frame" src="EN_300x250/index.html" width="300" height="250" title="300x250 creative" scrolling="no" frameborder="0" loading="lazy"></iframe></div></section>
-        <section class="specimen wide"><h2>BILLBOARD &nbsp; / &nbsp; 970 × 250</h2><div class="frame"><iframe class="ad-frame" src="EN_970x250/index.html" width="970" height="250" title="970x250 creative" scrolling="no" frameborder="0" loading="lazy"></iframe></div></section>
-        <section class="specimen wide"><h2>LEADERBOARD &nbsp; / &nbsp; 728 × 90</h2><div class="frame"><iframe class="ad-frame" src="EN_728x90/index.html" width="728" height="90" title="728x90 creative" scrolling="no" frameborder="0" loading="lazy"></iframe></div></section>
+        <div class="gallery">
+    <section class="specimen"><h2>HALF PAGE &nbsp; / &nbsp; 300 × 600</h2><div class="frame"><iframe class="ad-frame" src="EN_300x600/index.html" width="300" height="600" title="300x600 creative" scrolling="no" fetchpriority="high"></iframe></div></section>
+    <section class="specimen"><h2>MOBILE INTERSTITIAL &nbsp; / &nbsp; 320 × 480</h2><div class="frame"><iframe class="ad-frame" src="EN_320x480/index.html" width="320" height="480" title="320x480 creative" scrolling="no" fetchpriority="high"></iframe></div></section>
+    <section class="specimen"><h2>MEDIUM RECTANGLE &nbsp; / &nbsp; 300 × 250</h2><div class="frame"><iframe class="ad-frame" src="EN_300x250/index.html" width="300" height="250" title="300x250 creative" scrolling="no" fetchpriority="high"></iframe></div></section>
+    <section class="specimen wide"><h2>BILLBOARD &nbsp; / &nbsp; 970 × 250</h2><div class="frame"><iframe class="ad-frame" src="EN_970x250/index.html" width="970" height="250" title="970x250 creative" scrolling="no"></iframe></div></section>
+    <section class="specimen wide"><h2>LEADERBOARD &nbsp; / &nbsp; 728 × 90</h2><div class="frame"><iframe class="ad-frame" src="EN_728x90/index.html" width="728" height="90" title="728x90 creative" scrolling="no"></iframe></div></section>
+  </div>
       </div>
-    </div>
 
     <!-- Animated Ads -->
     <div class="panel" id="panel-animated" role="tabpanel" aria-labelledby="tab-animated" hidden>
@@ -675,5 +675,7 @@
       show(location.hash.slice(1));
     })();
   </script>
+
+
 </body>
 </html>

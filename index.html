@@ -128,9 +128,7 @@
 
     .flow {
       display: grid;
-      grid-template-columns:
-        minmax(210px, 0.72fr) 72px minmax(310px, 1fr) 72px
-        minmax(390px, 1.35fr);
+      grid-template-columns: minmax(0, 1fr) 72px minmax(0, 1fr) 72px minmax(0, 1fr);
       align-items: stretch;
     }
 
@@ -379,7 +377,7 @@
 
     @media (max-width: 1080px) {
       .flow {
-        grid-template-columns: 1fr 54px 1.15fr;
+        grid-template-columns: minmax(0, 1fr) 54px minmax(0, 1fr);
       }
 
       .card-creative {
@@ -639,7 +637,7 @@
       <section class="workflow" aria-labelledby="workflow-title">
       <header class="workflow-header">
         <p class="eyebrow">System architecture</p>
-        <h1 id="workflow-title">Creative delivery workflow for Product Ads</h1>
+        <h1 id="workflow-title">Creative delivery workflow</h1>
         <p class="subtitle">
           Product data flows through a cloud service and into a dynamic HTML creative.
         </p>

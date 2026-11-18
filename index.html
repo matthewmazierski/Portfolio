@@ -128,7 +128,9 @@
 
     .flow {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) 72px minmax(0, 1fr) 72px minmax(0, 1fr);
+      grid-template-columns:
+        minmax(210px, 0.72fr) 72px minmax(310px, 1fr) 72px
+        minmax(390px, 1.35fr);
       align-items: stretch;
     }
 
@@ -377,7 +379,7 @@
 
     @media (max-width: 1080px) {
       .flow {
-        grid-template-columns: minmax(0, 1fr) 54px minmax(0, 1fr);
+        grid-template-columns: 1fr 54px 1.15fr;
       }
 
       .card-creative {
@@ -471,7 +473,7 @@
 
   /* ===== Home page styles (from index.html, scoped to #panel-home) ===== */
 
-                  #panel-home .wrap { width: min(100% - 2rem, 960px); margin-inline: auto; }
+      #panel-home .wrap { width: min(100% - 2rem, 960px); margin-inline: auto; }
       #panel-home header { padding: 5.5rem 0 4rem; border-bottom: 1px solid #29364a; }
       #panel-home .eyebrow { color: var(--accent); font-size: .82rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
       #panel-home h1 { max-width: 760px; margin: .6rem 0 1rem; font-size: clamp(2.5rem, 7vw, 4.5rem); line-height: 1.08; letter-spacing: -.045em; }
@@ -494,11 +496,6 @@
       #panel-home .skills-grid .card h3 { margin-bottom: .5rem; }
       #panel-home .skills-grid p { margin: 0; color: var(--muted); }
       #panel-home footer { padding: 2rem 0 3rem; color: var(--muted); }
-
-     #panel-home @media (max-width: 600px) {
-        #panel-home header { padding: 3.75rem 0 3rem; }
-        #panel-home section { padding: 2.5rem 0; }
-      }
     
 </style>
 </head>
@@ -608,9 +605,9 @@
         <p>Three ready-to-preview placements for a fictional homewares brand. </p>
       </div>
       <div class="gallery">
-<section class="specimen wide"><h2>BILLBOARD &nbsp; / &nbsp; 970 × 250</h2><div class="frame"><div class="ad-box"><iframe onload="this.parentNode.classList.add('loaded')" class="ad-frame" data-src="work_examples/ANI_970x250/index.html" width="970" height="250" title="970x250 creative" scrolling="no"></iframe></div></div></section>
-<section class="specimen"><h2>HALF PAGE &nbsp; / &nbsp; 300 × 600</h2><div class="frame"><div class="ad-box"><iframe onload="this.parentNode.classList.add('loaded')" class="ad-frame" data-src="work_examples/ANI_300x600/index.html" width="300" height="600" title="300x600 creative" scrolling="no" fetchpriority="high"></iframe></div></div></section>
-<section class="specimen"><h2>MEDIUM RECTANGLE &nbsp; / &nbsp; 300 × 250</h2><div class="frame"><div class="ad-box"><iframe onload="this.parentNode.classList.add('loaded')" class="ad-frame" data-src="work_examples/ANI_300x250/index.html" width="300" height="250" title="300x250 creative" scrolling="no" fetchpriority="high"></iframe></div></div></section>
+<section class="specimen wide"><h2>BILLBOARD &nbsp; / &nbsp; 970 × 250</h2><div class="frame"><div class="ad-box"><iframe src="work_examples/ANI_970x250/index.html" class="ad-frame" data-src="work_examples/ANI_970x250/index.html" width="970" height="250" title="970x250 creative" scrolling="no"></iframe></div></div></section>
+<section class="specimen"><h2>HALF PAGE &nbsp; / &nbsp; 300 × 600</h2><div class="frame"><div class="ad-box"><iframe src="work_examples/ANI_300x600/index.html" class="ad-frame" data-src="work_examples/ANI_300x600/index.html" width="300" height="600" title="300x600 creative" scrolling="no" fetchpriority="high"></iframe></div></div></section>
+<section class="specimen"><h2>MEDIUM RECTANGLE &nbsp; / &nbsp; 300 × 250</h2><div class="frame"><div class="ad-box"><iframe src="work_examples/ANI_300x250/index.html" class="ad-frame" data-src="work_examples/ANI_300x250/index.html" width="300" height="250" title="300x250 creative" scrolling="no" fetchpriority="high"></iframe></div></div></section>
 
 </div>
 
@@ -637,7 +634,7 @@
       <section class="workflow" aria-labelledby="workflow-title">
       <header class="workflow-header">
         <p class="eyebrow">System architecture</p>
-        <h1 id="workflow-title">Creative delivery workflow</h1>
+        <h1 id="workflow-title">Creative delivery workflow for Product Ads</h1>
         <p class="subtitle">
           Product data flows through a cloud service and into a dynamic HTML creative.
         </p>
@@ -774,7 +771,7 @@
     // Start loading any iframes that were deferred with data-src
     function loadFrames(root) {
       root.querySelectorAll('iframe[data-src]').forEach(function (f) {
-        f.addEventListener('load', function () { f.parentNode.classList.add('loaded'); }, { once: true });
+        f.addEventListener('load', function () { f.parentNode.classList.add('loaded'); }, { once: false });
         f.src = f.dataset.src;
         f.removeAttribute('data-src');
       });

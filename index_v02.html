@@ -494,6 +494,10 @@
       #panel-home li + li { margin-top: .45rem; }
       #panel-home .skills-grid .card h3 { margin-bottom: .5rem; }
       #panel-home .skills-grid p { margin: 0; color: var(--muted); }
+      #panel-home .skills-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+      #panel-home .skill-chips { display: flex; flex-wrap: wrap; gap: .45rem; margin: 0; padding: 0; list-style: none; }
+      #panel-home .skill-chips li { margin: 0; padding: .25rem .7rem; border: 1px solid #3c526b; border-radius: 999px; color: #c3ccda; font-size: .85rem; line-height: 1.5; }
+      #panel-home .skill-chips li + li { margin-top: 0; }
       #panel-home footer { padding: 2rem 0 3rem; color: var(--muted); }
 
   /* ===== Case Studies ===== */
@@ -600,10 +604,27 @@
       <section aria-labelledby="skills-title">
         <h2 id="skills-title">Areas of expertise</h2>
         <div class="skills-grid">
-          <article class="card"><h3>Development</h3><p>Python, JavaScript, Google Apps Script, HTML5, CSS</p></article>
-          <article class="card"><h3>Cloud &amp; integration</h3><p>Google Cloud Platform, Cloud Run, APIs, IAM, scheduled and event-driven workflows</p></article>
-          <article class="card"><h3>Marketing technology</h3><p>Google Campaign Manager, Display &amp; Video 360, Google Analytics, Merchant Center, dynamic creative</p></article>
-          <article class="card"><h3>Automation &amp; data</h3><p>Product feeds, Google Sheets, data transformation, validation, content operations</p></article>
+          <article class="card"><h3>Google Cloud</h3><ul class="skill-chips">
+            <li>Google Cloud Platform (GCP)</li><li>Google Cloud Run</li><li>Cloud Functions</li><li>Cloud Monitor</li><li>Cloud Logging</li><li>Cloud IAM</li><li>Google Security Controls</li><li>Google Billing</li><li>Google Cloud APIs</li>
+          </ul></article>
+          <article class="card"><h3>Data &amp; storage</h3><ul class="skill-chips">
+            <li>Google BigQuery</li><li>Cloud SQL</li><li>Cloud Firestore</li><li>Cloud Storage</li><li>Google Looker Studio</li><li>Google Data Studio</li><li>Google Sheets</li><li>Data Processing</li><li>Data Validation</li>
+          </ul></article>
+          <article class="card"><h3>Development</h3><ul class="skill-chips">
+            <li>Python</li><li>FastAPI</li><li>JavaScript</li><li>Google Apps Script</li><li>Application Programming Interfaces (API)</li><li>HTML5</li><li>HTML</li><li>XHTML</li><li>CSS</li><li>jQuery</li><li>PHP</li><li>ActionScript</li><li>Flash</li><li>Flash Developer</li><li>Front-end</li><li>Web Development</li>
+          </ul></article>
+          <article class="card"><h3>Marketing technology</h3><ul class="skill-chips">
+            <li>Google Merchant Center</li><li>Google Campaign Manager</li><li>Display &amp; Video 360</li><li>Google Analytics</li><li>Dynamic Creative Optimization</li><li>Technology Marketing</li><li>Performance Reporting</li>
+          </ul></article>
+          <article class="card"><h3>Design &amp; experience</h3><ul class="skill-chips">
+            <li>User Experience (UX)</li><li>User Interface Design</li><li>Interactive Media</li><li>Creative</li><li>Adobe Creative Cloud</li>
+          </ul></article>
+          <article class="card"><h3>AI &amp; developer tools</h3><ul class="skill-chips">
+            <li>Claude Cowork</li><li>Claude Skills</li><li>ChatGPT</li><li>GitHub Copilot</li><li>Google Gemini</li><li>Microsoft Visual Studio Code</li><li>GitHub</li><li>Jira</li><li>Notion</li>
+          </ul></article>
+          <article class="card"><h3>Automation &amp; leadership</h3><ul class="skill-chips">
+            <li>Workflow Automation</li><li>Technical Leadership</li>
+          </ul></article>
         </div>
       </section>
 
@@ -692,28 +713,8 @@
             </div>
           </div>
           <div class="card-rule"></div>
-          <div class="tree">
-            <div class="branch level-1">
-              <span class="branch-line"></span>
-              <div>
-                <h3>Google Sheets</h3>
-                <div class="branch level-2">
-                  <span class="branch-line"></span>
-                  <div>
-                    <h3>Product List</h3>
-                    <div class="leaf-list">
-                      <div class="leaf"><span class="leaf-dot"></span><span>Product SKU</span></div>
-                      <div class="leaf"><span class="leaf-dot"></span><span>Title</span></div>
-                      <div class="leaf"><span class="leaf-dot"></span><span>Image URL</span></div>
-                      <div class="leaf"><span class="leaf-dot"></span><span>Click URL</span></div>
-                      <div class="leaf"><span class="leaf-dot"></span><span>Price</span></div>
-                      <div class="leaf"><span class="leaf-dot"></span><span>Sale Price</span></div>
-                      <div class="leaf"><span class="leaf-dot"></span><span>Availability</span></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div class="simple-content">
+            <div class="leaf"><span class="leaf-dot"></span><span>Product list</span></div>
           </div>
         </article>
 

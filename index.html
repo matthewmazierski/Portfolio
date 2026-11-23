@@ -129,8 +129,7 @@
     .flow {
       display: grid;
       grid-template-columns:
-        minmax(210px, 0.72fr) 72px minmax(310px, 1fr) 72px
-        minmax(390px, 1.35fr);
+        minmax(0, 1fr) 48px minmax(0, 1fr) 48px minmax(0, 1fr);
       align-items: stretch;
     }
 
@@ -379,18 +378,17 @@
 
     @media (max-width: 1080px) {
       .flow {
-        grid-template-columns: 1fr 54px 1.15fr;
+        grid-template-columns:
+          minmax(0, 1fr) 32px minmax(0, 1fr) 32px minmax(0, 1fr);
+      }
+
+      .wf-card {
+        min-width: 0;
       }
 
       .card-creative {
-        grid-column: 1 / -1;
-        min-height: auto;
-        margin-top: 54px;
-      }
-
-      .card-cloud + .connector {
-        position: absolute;
-        visibility: hidden;
+        min-height: 440px;
+        margin-top: 0;
       }
 
       .creative-grid {
@@ -650,7 +648,7 @@
 
       <div class="flow" aria-label="Workflow from Google Sheets to HTML Creative">
         <article class="wf-card card-sheets">
-          <div class="card-top">
+         <div class="card-top">
             <div class="icon-box sheets-box">
               <svg viewBox="0 0 32 32" aria-hidden="true">
                 <path fill="#0F9D58" d="M6 3h14l6 6v20H6z"></path>
@@ -664,8 +662,29 @@
             </div>
           </div>
           <div class="card-rule"></div>
-          <div class="simple-content">
-            <div class="leaf"><span class="leaf-dot"></span><span>Product list</span></div>
+          
+          <div class="tree">
+            <div class="branch level-1">
+              <span class="branch-line"></span>
+              
+              <div>
+                <h3>Product list</h3>
+                <div class="branch level-2">
+                  <span class="branch-line"></span>
+                  <div class="leaf-list">
+                    <div class="leaf"><span class="leaf-dot"></span><span>SKU</span></div>
+                    <div class="leaf"><span class="leaf-dot"></span><span>Title</span></div>
+                    <div class="leaf"><span class="leaf-dot"></span><span>Description</span></div>
+                    <div class="leaf"><span class="leaf-dot"></span><span>Price</span></div>
+                    <div class="leaf"><span class="leaf-dot"></span><span>Sale Price</span></div>
+                    <div class="leaf"><span class="leaf-dot"></span><span>Image URL</span></div>
+                    <div class="leaf"><span class="leaf-dot"></span><span>Click URL</span></div>
+                    <div class="leaf"><span class="leaf-dot"></span><span>Availability</span></div>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
           </div>
         </article>
 

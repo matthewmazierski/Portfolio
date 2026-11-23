@@ -129,7 +129,7 @@
     .flow {
       display: grid;
       grid-template-columns:
-        minmax(0, 1fr) 72px minmax(0, 1fr) 72px minmax(0, 1fr);
+        minmax(0, 1fr) 48px minmax(0, 1fr) 48px minmax(0, 1fr);
       align-items: stretch;
     }
 
@@ -378,18 +378,17 @@
 
     @media (max-width: 1080px) {
       .flow {
-        grid-template-columns: minmax(0, 1fr) 54px minmax(0, 1fr);
+        grid-template-columns:
+          minmax(0, 1fr) 32px minmax(0, 1fr) 32px minmax(0, 1fr);
+      }
+
+      .wf-card {
+        min-width: 0;
       }
 
       .card-creative {
-        grid-column: 1 / -1;
-        min-height: auto;
-        margin-top: 54px;
-      }
-
-      .card-cloud + .connector {
-        position: absolute;
-        visibility: hidden;
+        min-height: 440px;
+        margin-top: 0;
       }
 
       .creative-grid {
@@ -494,39 +493,7 @@
       #panel-home li + li { margin-top: .45rem; }
       #panel-home .skills-grid .card h3 { margin-bottom: .5rem; }
       #panel-home .skills-grid p { margin: 0; color: var(--muted); }
-      #panel-home .skills-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
-      #panel-home .skill-chips { display: flex; flex-wrap: wrap; gap: .45rem; margin: 0; padding: 0; list-style: none; }
-      #panel-home .skill-chips li { margin: 0; padding: .25rem .7rem; border: 1px solid #3c526b; border-radius: 999px; color: #c3ccda; font-size: .85rem; line-height: 1.5; }
-      #panel-home .skill-chips li + li { margin-top: 0; }
       #panel-home footer { padding: 2rem 0 3rem; color: var(--muted); }
-
-  /* ===== Case Studies ===== */
-  #panel-casestudies .cs { max-width: 960px; }
-  #panel-casestudies .cs-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin-bottom: 3rem; }
-  #panel-casestudies .cs-meta .card { padding: 1.1rem 1.25rem; border: 1px solid #29364a; border-radius: .7rem; background: var(--panel); }
-  #panel-casestudies .cs-meta .label { display: block; margin-bottom: .35rem; color: var(--accent); font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
-  #panel-casestudies .cs-meta p { margin: 0; color: #c3ccda; }
-  #panel-casestudies .cs section { padding: 2.5rem 0; border-top: 1px solid #29364a; }
-  #panel-casestudies .cs h2 { margin: 0 0 1rem; font-size: 1.5rem; letter-spacing: -.02em; }
-  #panel-casestudies .cs p { color: var(--muted); }
-  #panel-casestudies .cs-steps { display: grid; gap: 1rem; margin: 1.5rem 0 0; padding: 0; list-style: none; counter-reset: step; }
-  #panel-casestudies .cs-steps li { position: relative; margin: 0; padding: 1.1rem 1.25rem 1.1rem 4rem; border: 1px solid #29364a; border-radius: .7rem; background: var(--panel); color: var(--muted); counter-increment: step; }
-  #panel-casestudies .cs-steps li::before { content: counter(step); position: absolute; top: 1.1rem; left: 1.25rem; display: grid; width: 1.8rem; height: 1.8rem; place-items: center; border-radius: 50%; background: var(--accent); color: #101827; font-size: .85rem; font-weight: 700; }
-  #panel-casestudies .cs-steps strong { display: block; color: #e8edf5; }
-  #panel-casestudies .cs-chips { display: flex; flex-wrap: wrap; gap: .6rem; margin: 0; padding: 0; list-style: none; }
-  #panel-casestudies .cs-chips li { margin: 0; padding: .45rem .85rem; border: 1px solid #3c526b; border-radius: 999px; color: #c3ccda; font-size: .92rem; }
-  #panel-casestudies .cs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
-  #panel-casestudies .cs-grid .card { padding: 1.25rem; border: 1px solid #29364a; border-radius: .7rem; background: var(--panel); }
-  #panel-casestudies .cs-grid .card h3 { margin: 0 0 .5rem; font-size: 1.05rem; }
-  #panel-casestudies .cs-grid .card p { margin: 0; }
-  #panel-casestudies .cs-tech { margin: 0; padding: 0; list-style: none; display: grid; gap: .9rem; }
-  #panel-casestudies .cs-tech li { margin: 0; padding-left: 1.1rem; border-left: 2px solid #3c526b; color: var(--muted); }
-  #panel-casestudies .cs-tech strong { color: #e8edf5; }
-  #panel-casestudies .cs-role { padding: 1.5rem; border: 1px solid #29364a; border-left: 3px solid var(--accent); border-radius: .7rem; background: var(--panel); }
-  #panel-casestudies .cs-role p:last-child { margin-bottom: 0; }
-  @media (max-width: 600px) {
-    #panel-casestudies .cs-steps li { padding-left: 3.5rem; }
-  }
     
 </style>
 </head>
@@ -699,7 +666,7 @@
 
       <div class="flow" aria-label="Workflow from Google Sheets to HTML Creative">
         <article class="wf-card card-sheets">
-          <div class="card-top">
+         <div class="card-top">
             <div class="icon-box sheets-box">
               <svg viewBox="0 0 32 32" aria-hidden="true">
                 <path fill="#0F9D58" d="M6 3h14l6 6v20H6z"></path>
@@ -713,8 +680,29 @@
             </div>
           </div>
           <div class="card-rule"></div>
-          <div class="simple-content">
-            <div class="leaf"><span class="leaf-dot"></span><span>Product list</span></div>
+          
+          <div class="tree">
+            <div class="branch level-1">
+              <span class="branch-line"></span>
+              
+              <div>
+                <h3>Product list</h3>
+                <div class="branch level-2">
+                  <span class="branch-line"></span>
+                  <div class="leaf-list">
+                    <div class="leaf"><span class="leaf-dot"></span><span>SKU</span></div>
+                    <div class="leaf"><span class="leaf-dot"></span><span>Title</span></div>
+                    <div class="leaf"><span class="leaf-dot"></span><span>Description</span></div>
+                    <div class="leaf"><span class="leaf-dot"></span><span>Price</span></div>
+                    <div class="leaf"><span class="leaf-dot"></span><span>Sale Price</span></div>
+                    <div class="leaf"><span class="leaf-dot"></span><span>Image URL</span></div>
+                    <div class="leaf"><span class="leaf-dot"></span><span>Click URL</span></div>
+                    <div class="leaf"><span class="leaf-dot"></span><span>Availability</span></div>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
           </div>
         </article>
 

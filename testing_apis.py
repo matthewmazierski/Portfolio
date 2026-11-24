@@ -4,7 +4,7 @@ import requests
 
 URLS = {
     "standard": "https://read-google-sheets-481696182127.northamerica-northeast2.run.app/?sheet_id=1zO6N2c2nKAW6DHJbZHqcJPZBhC3OYvWG0So7wAzbGoE&tab_name=Sheet1",
-    "fast_api": "https://read-google-sheets-fast-api-481696182127.northamerica-northeast2.run.app?sheet_id=1zO6N2c2nKAW6DHJbZHqcJPZBhC3OYvWG0So7wAzbGoE&tab_name=Sheet1",
+    "fast_api": "https://sheets-api-481696182127.northamerica-northeast2.run.app?sheet_id=1zO6N2c2nKAW6DHJbZHqcJPZBhC3OYvWG0So7wAzbGoE&tab_name=Sheet1",
 }
 RUNS = 10
 
